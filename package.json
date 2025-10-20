@@ -1,0 +1,14 @@
+{
+  "name": "gestao-ideias",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.3",
+    "sequelize": "^6.6.5",
+    "nodemon": "^2.0.12"
+  }
+}
