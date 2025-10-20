@@ -1,0 +1,16 @@
+<h2>Todas as Ideias:</h2>
+{{#if idea.length}}
+  <ul>
+    {{#each idea}}
+      <li>
+        <b>{{this.title}}</b> - {{this.description}} - 
+        <a href="/idea/edit/{{this.id}}">Editar</a>
+        <form style="display:inline;" method="post" action="/idea/delete">
+          <input type="hidden" name="id" value="{{this.id}}"/>
+          <button type="submit">Excluir</button>
+        </form>
+      </li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>🎉

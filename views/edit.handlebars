@@ -1,0 +1,12 @@
+<h2>Editando a ideia: {{task.title}}</h2>
+<form action="/idea/edit" method="post">
+  <input type="hidden" name="id" value="{{task.id}}" />
+  <label>Título:</label><br>
+  <input type="text" name="title" value="{{task.title}}" required/><br>
+  <label>Descrição:</label><br>
+  <input type="text" name="description" value="{{task.description}}" /><br><br>
+  <label for="done">Concluída?</label>
+  <input type="checkbox" id="done" name="done" {{#if task.done}}checked{{/if}}/>
+  <br><br>
+  <button type="submit">Salvar Alterações</button>
+</form>
