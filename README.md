@@ -80,10 +80,11 @@ Acesse em: [http://localhost:3000](http://localhost:3000)
 
 ## Fluxograma
 
-<img width="2376" height="1310" alt="image" src="https://github.com/user-attachments/assets/591bda13-4c38-4d6d-bdcc-280bdb0c4f2c" />
+<img width="2342" height="1272" alt="image" src="https://github.com/user-attachments/assets/184470a2-c323-4715-bb45-06d4faf3fc33" />
 
 
 ---
+
 
 
 
