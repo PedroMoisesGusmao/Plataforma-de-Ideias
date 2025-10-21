@@ -80,8 +80,10 @@ Acesse em: [http://localhost:3000](http://localhost:3000)
 
 ## Fluxograma
 
-Inserir o fluxograma
+<img width="2376" height="1310" alt="image" src="https://github.com/user-attachments/assets/591bda13-4c38-4d6d-bdcc-280bdb0c4f2c" />
+
 
 ---
+
 
 
