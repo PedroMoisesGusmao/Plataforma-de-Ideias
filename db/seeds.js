@@ -205,9 +205,9 @@ async function runSeeds() {
 
     console.log('\n🎉 Seeds executados com sucesso!');
     console.log(`📊 Resumo:`);
-    console.log(`   👥 Usuários: ${users.length}`);
-    console.log(`   💡 Ideias: ${ideas.length}`);
-    console.log(`   👍 Votos: ${votes.length}`);
+    console.log(`👥 Usuários: ${users.length}`);
+    console.log(`💡 Ideias: ${ideas.length}`);
+    console.log(`👍 Votos: ${votes.length}`);
     
     process.exit(0);
     

@@ -52,6 +52,51 @@ IdeaSchema.virtual('userVoted');
 IdeaSchema.set('toJSON', { virtuals: true });
 IdeaSchema.set('toObject', { virtuals: true });
 
+// Métodos básicos de CRUD
+IdeaSchema.statics.createIdea = async function(data) {
+  try {
+    const idea = new this(data);
+    return await idea.save();
+  } catch (error) {
+    throw error;
+  }
+};
+
+IdeaSchema.statics.findOneIdea = async function(id) {
+  try {
+    return await this.findById(id).populate('authorId', 'name email');
+  } catch (error) {
+    throw error;
+  }
+};
+
+IdeaSchema.statics.findAllIdeas = async function(filter = {}) {
+  try {
+    return await this.find(filter).populate('authorId', 'name email').sort({ createdAt: -1 });
+  } catch (error) {
+    throw error;
+  }
+};
+
+IdeaSchema.statics.updateIdea = async function(id, data) {
+  try {
+    return await this.findByIdAndUpdate(id, data, {
+      new: true,
+      runValidators: true
+    }).populate('authorId', 'name email');
+  } catch (error) {
+    throw error;
+  }
+};
+
+IdeaSchema.statics.deleteIdea = async function(id) {
+  try {
+    return await this.findByIdAndDelete(id);
+  } catch (error) {
+    throw error;
+  }
+};
+
 // Método estático para buscar ideias com contagem de votos
 IdeaSchema.statics.findWithVoteCount = function(filter = {}) {
   return this.aggregate([

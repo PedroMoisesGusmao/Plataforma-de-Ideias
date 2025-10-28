@@ -53,4 +53,57 @@ UserSchema.methods.toJSON = function() {
   return userObject;
 };
 
+// Métodos básicos de CRUD
+UserSchema.statics.createUser = async function(data) {
+  try {
+    const user = new this(data);
+    return await user.save();
+  } catch (error) {
+    throw error;
+  }
+};
+
+UserSchema.statics.findOneUser = async function(id) {
+  try {
+    return await this.findById(id).select('-password');
+  } catch (error) {
+    throw error;
+  }
+};
+
+UserSchema.statics.findAllUsers = async function(filter = {}) {
+  try {
+    return await this.find(filter).select('-password').sort({ name: 1 });
+  } catch (error) {
+    throw error;
+  }
+};
+
+UserSchema.statics.updateUser = async function(id, data) {
+  try {
+    return await this.findByIdAndUpdate(id, data, {
+      new: true,
+      runValidators: true
+    }).select('-password');
+  } catch (error) {
+    throw error;
+  }
+};
+
+UserSchema.statics.deleteUser = async function(id) {
+  try {
+    return await this.findByIdAndDelete(id);
+  } catch (error) {
+    throw error;
+  }
+};
+
+UserSchema.statics.findByEmail = async function(email) {
+  try {
+    return await this.findOne({ email });
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = mongoose.model('User', UserSchema);
