@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 // Importa todos os models para garantir que os índices sejam criados
-const User = require('./User');
-const Idea = require('./Idea');
-const Vote = require('./Vote');
+const User = require('../models/User');
+const Idea = require('../models/Idea');
+const Vote = require('../models/Vote');
 
 /**
  * Configura todos os índices necessários para otimização de performance
