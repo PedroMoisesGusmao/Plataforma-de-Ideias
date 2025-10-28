@@ -1,13 +1,41 @@
+const { queries } = require('../db/queries');
+const Idea = require('../models/Idea');
+ 
 module.exports = {
-    getAllIdeas: (req, res) => {
+    async getAllIdeas (req, res) {
+        const ideas = await queries.getAllIdeas();
+        console.log(ideas);
+        res.render('all', { ideas });
     },
-
-    saveIdea: (req, res) => {
+ 
+    async saveIdea (req, res) {
+        await Idea.create({
+            title : req.body.title,
+            description : req.body.description,
+            category : req.body.category,
+            authorId : req.user._id,
+            status : req.status
+        })
+        res.redirect('/ideas');
     },
-
-    updateIdea: (req, res) => {
+ 
+    async updateIdea (req, res) {
+         await Idea.updateIdea({
+            title : req.body.title,
+            description : req.body.description,
+            category : req.body.category,
+            authorId : req.user._id,
+            status : req.status
+        },
+        { where: { id: req.params.id } }
+    )
+        res.redirect('/ideas');
     },
-
-    deleteIdea: (req, res) => {
+ 
+    async deleteIdea (req, res) {
+        const id = req.body.id;
+        await Idea.deleteIdea({ where: { id: id } });
+        res.redirect('/ideas');
     }
 }
+ 
