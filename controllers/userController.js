@@ -1,9 +1,12 @@
 const User = require("../models/User");
 
 module.exports = {
-    login({name, email, password}, res) {
-        user.findOne(email);
-        
+    login(req, res) {
+        const {email, password} = req.body;
+        const user = User.find(email);
+        if (user.comparePassword(password)) {
+            res.redirect('/home');
+        }
     },
 
     async registerUser (req, res) {
