@@ -7,7 +7,9 @@ module.exports = {
     async registerUser(req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            req.flash('error_msg', errors.array().map(e => e.msg).join(', '));
+            req.flash('formData', JSON.stringify(req.body));
+            return res.redirect('/user/register');
         }
  
         const { name, email, password } = req.body;
@@ -16,15 +18,19 @@ module.exports = {
             const userExists = await User.findOne({ where: { email } });
  
             if (userExists) {
-                return res.status(400).json({ message: 'E-mail já cadastrado' });
+                req.flash('error_msg', 'E-mail já cadastrado');
+                req.flash('formData', JSON.stringify(req.body));
+                return res.redirect('/user/register');
             }
  
             await User.create({ name, email, password });
  
-            res.redirect('/home');
+            req.flash('success_msg', 'Usuário registrado com sucesso!');
+            res.redirect('/user/login');
         } catch (error) {
             console.error(error);
-            return res.status(500).json({ message: 'Erro ao registrar usuário' });
+            req.flash('error_msg', 'Erro ao registrar usuário');
+            res.redirect('/user/register');
         }
     }
 };
