@@ -1,11 +1,12 @@
+const express = require('express');
 const { validationResult } = require('express-validator');
 const User = require("../models/User");
- 
-module.exports = {
-    async login(req, res) {},
- 
-    async registerUser(req, res) {
-        const errors = validationResult(req);
+const router = express.Router();
+
+router.post('/login', async (req, res) => {});
+
+router.post('/register', async (req, res) => {
+    const errors = validationResult(req);
         if (!errors.isEmpty()) {
             req.flash('error_msg', errors.array().map(e => e.msg).join(', '));
             req.flash('formData', JSON.stringify(req.body));
@@ -32,7 +33,6 @@ module.exports = {
             req.flash('error_msg', 'Erro ao registrar usuário');
             res.redirect('/user/register');
         }
-    }
-};
- 
- 
+});
+
+module.exports = router;
