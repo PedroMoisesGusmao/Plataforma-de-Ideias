@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { body } = require('express-validator');
-const ideasController = require('../controllers/ideasController');
+const ideaController = require('../controllers/ideaController');
  
 router.post('/ideas',
   [
@@ -15,7 +15,7 @@ router.post('/ideas',
     body('category')
       .notEmpty().withMessage('A categoria é obrigatória')
   ],
-  ideasController.saveIdea
+  ideaController.saveIdea
 );
  
 router.post('/ideas/:id',
@@ -30,7 +30,7 @@ router.post('/ideas/:id',
     body('category')
       .optional()
   ],
-  ideasController.updateIdea
+  ideaController.updateIdea
 );
  
 module.exports = router;
