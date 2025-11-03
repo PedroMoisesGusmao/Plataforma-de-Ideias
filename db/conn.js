@@ -7,15 +7,7 @@ const connectDB = async () => {
         // String de conexão com configurações otimizadas
         const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/plataforma_ideias';
         
-        await mongoose.connect(mongoURI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            maxPoolSize: 10, // Máximo de conexões no pool
-            serverSelectionTimeoutMS: 5000, // Timeout para seleção do servidor
-            socketTimeoutMS: 45000, // Timeout para operações
-            bufferMaxEntries: 0, // Desabilita buffering
-            bufferCommands: false, // Desabilita command buffering
-        });
+        await mongoose.connect(mongoURI);
 
         console.log('✅ MongoDB conectado com sucesso!');
 

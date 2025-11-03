@@ -5,6 +5,7 @@ const flash = require('express-flash');
 const conn = require('./db/conn');
 const ideaRoute = require('./routes/ideaRoute');
 const userRoute = require('./routes/userRoute');
+const ideaController = require('./controllers/ideaController');
  
 const app = express();
 const PORT = 3000;
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
  
 app.use('/idea', ideaRoute);
 app.use('/user', userRoute);
+app.get('/home', ideaController.getAllIdeas);
 app.get('/', (req, res) => res.redirect('/home'));
  
 conn()
