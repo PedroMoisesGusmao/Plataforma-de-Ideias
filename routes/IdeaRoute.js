@@ -30,7 +30,7 @@ router.put('/ideas/:id',
     body('category')
       .optional()
   ],
-  ideasController.updateIdea
+  ideaController.updateIdea
 );
  
 module.exports = router;

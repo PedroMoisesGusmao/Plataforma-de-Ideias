@@ -1,13 +1,11 @@
-const { queries } = require('../db/queries');
 const Idea = require('../models/Idea');
- 
+
 module.exports = {
     async getAllIdeas (req, res) {
-        const ideas = await queries.getAllIdeas();
-        console.log(ideas);
-        res.render('all', { ideas });
+        const ideas = await Idea.find({ raw: true });
+        return res.render('all', { ideas });
     },
- 
+
     async saveIdea (req, res) {
         await Idea.create({
             title : req.body.title,
