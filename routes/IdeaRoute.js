@@ -18,7 +18,7 @@ router.post('/ideas',
   ideaController.saveIdea
 );
  
-router.post('/ideas/:id',
+router.put('/ideas/:id',
   [
     body('title')
       .optional()
