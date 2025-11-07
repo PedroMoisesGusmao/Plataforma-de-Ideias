@@ -1,12 +1,55 @@
-<h2>Editando a ideia: {{task.title}}</h2>
-<form action="/idea/edit" method="post">
-  <input type="hidden" name="id" value="{{task.id}}" />
-  <label>Título:</label><br>
-  <input type="text" name="title" value="{{task.title}}" required/><br>
-  <label>Descrição:</label><br>
-  <input type="text" name="description" value="{{task.description}}" /><br><br>
-  <label for="done">Concluída?</label>
-  <input type="checkbox" id="done" name="done" {{#if task.done}}checked{{/if}}/>
-  <br><br>
-  <button type="submit">Salvar Alterações</button>
-</form>
+<div class="card">
+    <h2>✏️ Editar Ideia</h2>
+
+    <div class="form-container">
+        <form action="/idea/update/{{idea._id}}" method="POST" class="idea-form">
+            <div class="form-group">
+                <label for="title">Título:</label>
+                <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        value="{{idea.title}}"
+                        minlength="5"
+                        maxlength="100"
+                        required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="description">Descrição:</label>
+                <textarea
+                        id="description"
+                        name="description"
+                        minlength="10"
+                        maxlength="500"
+                        required
+                >{{idea.description}}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Categoria:</label>
+                <select id="category" name="category" required>
+                    <option value="Tecnologia" {{#if (eq idea.category 'Tecnologia')}}selected{{/if}}>💻 Tecnologia</option>
+                    <option value="Processos" {{#if (eq idea.category 'Processos')}}selected{{/if}}>⚙️ Processos</option>
+                    <option value="Produtos" {{#if (eq idea.category 'Produtos')}}selected{{/if}}>📦 Produtos</option>
+                    <option value="Sustentabilidade" {{#if (eq idea.category 'Sustentabilidade')}}selected{{/if}}>🌱 Sustentabilidade</option>
+                    <option value="RH" {{#if (eq idea.category 'RH')}}selected{{/if}}>👥 RH</option>
+                    <option value="Marketing" {{#if (eq idea.category 'Marketing')}}selected{{/if}}>📱 Marketing</option>
+                    <option value="Outros" {{#if (eq idea.category 'Outros')}}selected{{/if}}>✨ Outros</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                    <option value="Pendente" {{#if (eq idea.status 'Pendente')}}selected{{/if}}>⏳ Pendente</option>
+                    <option value="Aprovada" {{#if (eq idea.status 'Aprovada')}}selected{{/if}}>✅ Aprovada</option>
+                    <option value="Rejeitada" {{#if (eq idea.status 'Rejeitada')}}selected{{/if}}>❌ Rejeitada</option>
+                </select>
+            </div>
+
+            <button type="submit">💾 Atualizar Ideia</button>
+        </form>
+    </div>
+</div>

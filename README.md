@@ -29,6 +29,17 @@ A **Plataforma de Ideias para Inovação** é um sistema web desenvolvido para p
 
 ---
 
+## ( ͡• ͜ʖ ͡• ) Rotas (URL)
+
+| Módulo         | Funcionalidade                                     |
+|----------------|----------------------------------------------------|
+| /              | Começo, onde o usuário escolhe o login ou cadastro |
+| /user/login    | Login                                              |
+| /user/register | Cadastro                                           |
+| /home          | Tela inicial, com listagem das ideias              |
+| /create        | Criação de ideias                                  |
+
+
 ## 🗄️ Modelagem do Banco de Dados
 
 inserir a modelagem
