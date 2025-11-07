@@ -39,6 +39,7 @@ A **Plataforma de Ideias para Inovação** é um sistema web desenvolvido para p
 | /home          | Tela inicial, com listagem das ideias              |
 | /create        | Criação de ideias                                  |
 
+---
 
 ## 🗄️ Modelagem do Banco de Dados
 
@@ -95,6 +96,7 @@ Acesse em: [http://localhost:3000](http://localhost:3000)
 
 
 ---
+
 
 
 
