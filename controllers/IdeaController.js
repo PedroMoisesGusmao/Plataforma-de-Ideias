@@ -12,9 +12,9 @@ module.exports = {
             description : req.body.description,
             category : req.body.category,
             authorId : req.user._id,
-            status : req.status
+            status : req.body.status
         })
-        res.redirect('/ideas');
+        res.redirect('/home');
     },
  
     async updateIdea (req, res) {
@@ -22,8 +22,8 @@ module.exports = {
             title : req.body.title,
             description : req.body.description,
             category : req.body.category,
-            authorId : req.user._id,
-            status : req.status
+            authorId : req.userId,
+            status : req.body.status
         },
         { where: { id: req.params.id } }
     )

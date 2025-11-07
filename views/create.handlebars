@@ -1,8 +1,57 @@
-<h2>Criando uma nova ideia</h2>
-<form action="/idea/create" method="post">
-  <label>Título:</label><br>
-  <input type="text" name="title" placeholder="O que precisa ser feito?" required/><br>
-  <label>Descrição:</label><br>
-  <input type="text" name="description" placeholder="Algum detalhe extra?" /><br><br>
-  <button type="submit">Criar ideia</button>
-</form>
+<div class="card">
+    <h2>Criar ideia</h2>
+
+    <div class="form-container">
+        <form action="/ideas/create" method="POST" class="idea-form">
+            <div class="form-group">
+                <label for="title">Título:</label>
+                <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        minlength="5"
+                        maxlength="100"
+                        required
+                        placeholder="Digite o título da sua ideia"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="description">Descrição:</label>
+                <textarea
+                        id="description"
+                        name="description"
+                        minlength="10"
+                        maxlength="500"
+                        required
+                        placeholder="Descreva sua ideia com detalhes..."
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Categoria:</label>
+                <select id="category" name="category" required>
+                    <option value="">Selecione uma categoria</option>
+                    <option value="Tecnologia">💻 Tecnologia</option>
+                    <option value="Processos">⚙️ Processos</option>
+                    <option value="Produtos">📦 Produtos</option>
+                    <option value="Sustentabilidade">🌱 Sustentabilidade</option>
+                    <option value="RH">👥 RH</option>
+                    <option value="Marketing">📱 Marketing</option>
+                    <option value="Outros">✨ Outros</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                    <option value="Pendente">⏳ Pendente</option>
+                    <option value="Aprovada">✅ Aprovada</option>
+                    <option value="Rejeitada">❌ Rejeitada</option>
+                </select>
+            </div>
+
+            <button type="submit">Criar Ideia</button>
+        </form>
+    </div>
+</div>

@@ -6,16 +6,16 @@ const conn = require('./db/conn');
 const ideaRoute = require('./routes/ideaRoute');
 const userRoute = require('./routes/userRoute');
 const ideaController = require('./controllers/ideaController');
- 
+
 const app = express();
 const PORT = 3000;
- 
+
 const hbs = exphbs.create({
   helpers: {
     eq: (a, b) => a === b
   }
 });
- 
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.engine('handlebars', hbs.engine);
@@ -29,20 +29,24 @@ app.use(
     saveUninitialized: false
   })
 );
- 
+
 app.use(flash());
- 
+
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');    
   next();
 });
- 
+
 app.use('/idea', ideaRoute);
 app.use('/user', userRoute);
+app.get('/create', (req, res) => res.render('create'));
+app.post('/create', ideaController.saveIdea);
 app.get('/home', ideaController.getAllIdeas);
-app.get('/', (req, res) => res.redirect('/home'));
- 
+app.get('/', (req, res) => {
+    res.render('start', { layout: 'start', title: 'Bem vindo!!' });
+});
+
 conn()
   .then(() => {
     app.listen(PORT, () =>

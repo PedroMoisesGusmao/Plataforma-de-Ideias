@@ -5,8 +5,7 @@ require('dotenv').config();
 const connectDB = async () => {
     try {
         // String de conexão com configurações otimizadas
-        const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/plataforma_ideias';
-        
+        const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://dbUser:1234@mongococo2.vrvd9p7.mongodb.net/?appName=mongococo2';        
         await mongoose.connect(mongoURI);
 
         console.log('✅ MongoDB conectado com sucesso!');
