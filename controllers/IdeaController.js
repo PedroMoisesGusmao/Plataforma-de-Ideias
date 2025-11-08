@@ -1,15 +1,30 @@
 const Idea = require('../models/Idea');
+const Vote = require('../models/Vote');
 
 module.exports = {
-  async getAllIdeas(req, res) {
-    try {
-      const ideas = await Idea.find().lean();
-      res.render('all', { ideas });
-    } catch (error) {
-      console.error('Erro ao buscar ideias:', error);
-      res.render('all', { ideas: [] });
-    }
-  },
+    async getAllIdeas(req, res) {
+        try {
+            const userEmail = req.session.user?.email;
+            const ideas = await Idea.find().lean();
+
+            for (let idea of ideas) {
+                const votes = await Vote.countVotesForIdea(idea._id);
+                idea.votesTotal = votes.total || 0;
+
+                if (userEmail) {
+                    const userVote = await Vote.findOne({ userEmail, ideaId: idea._id });
+                    idea.userVoted = !!userVote;
+                } else {
+                    idea.userVoted = false;
+                }
+            }
+
+            res.render('all', { ideas });
+        } catch (error) {
+            console.error('Erro ao buscar ideias:', error);
+            res.render('all', { ideas: [] });
+        }
+    },
 
   async saveIdea(req, res) {
     try {
@@ -44,7 +59,7 @@ module.exports = {
 
     async updateIdea(req, res) {
         try {
-            const id = req.params.id;
+            const { id } = req.params;
             await Idea.findByIdAndUpdate(id, {
                 title: req.body.title,
                 description: req.body.description,
