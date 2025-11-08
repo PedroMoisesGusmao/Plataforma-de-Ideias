@@ -4,13 +4,11 @@ require('dotenv').config();
 
 const connectDB = async () => {
     try {
-        // String de conexão com configurações otimizadas
-        const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://dbUser:1234@mongococo2.vrvd9p7.mongodb.net/?appName=mongococo2';        
+        const mongoURI = process.env.MONGODB_URI;        
         await mongoose.connect(mongoURI);
 
         console.log('✅ MongoDB conectado com sucesso!');
 
-        // Criar índices após conexão bem-sucedida
         if (process.env.NODE_ENV !== 'test') {
             await createIndexes();
         }

@@ -2,7 +2,7 @@
     <h2>Criar ideia</h2>
 
     <div class="form-container">
-        <form action="/ideas/create" method="POST" class="idea-form">
+        <form action="/create" method="POST" class="idea-form">
             <div class="form-group">
                 <label for="title">Título:</label>
                 <input
@@ -45,9 +45,11 @@
             <div class="form-group">
                 <label for="status">Status:</label>
                 <select id="status" name="status" required>
-                    <option value="Pendente">⏳ Pendente</option>
-                    <option value="Aprovada">✅ Aprovada</option>
-                    <option value="Rejeitada">❌ Rejeitada</option>
+                    <option value="Ativa">Ativa</option>
+                    <option value="Aprovada">Aprovada</option>
+                    <option value="Em Análise">Em Análise</option>
+                    <option value="Rejeitada">Rejeitada</option>
+                    <option value="Implementada">Implementada</option>
                 </select>
             </div>
 

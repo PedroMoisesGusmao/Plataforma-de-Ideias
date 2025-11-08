@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <title>Gestão de ideias</title>
-    <link rel="stylesheet" href="/css/styles.css"> </head>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
 <body>
-<hr>
-<main>
-    {{{ body }}}
-</main>
+    <hr>
+    <main>
+        {{#if success_msg}}
+        <div class="flash success">
+            {{success_msg}}
+        </div>
+        {{/if}}
+
+        {{#if error_msg}}
+        <div class="flash error">
+            {{error_msg}}
+        </div>
+        {{/if}}
+        {{{ body }}}
+    </main>
 </body>
+
 </html>

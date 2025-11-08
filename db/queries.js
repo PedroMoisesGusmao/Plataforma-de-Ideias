@@ -36,8 +36,8 @@ class DatabaseQueries {
         {
           $lookup: {
             from: 'users',
-            localField: 'authorId',
-            foreignField: '_id',
+            localField: 'authorEmail',
+            foreignField: 'email',
             as: 'author'
           }
         },
@@ -123,13 +123,13 @@ class DatabaseQueries {
 
   /**
    * Busca ideias de um usuário específico com contagem de votos
-   * @param {String} userId - ID do usuário
+   * @param {String} email - Email do usuário
    * @returns {Array} Array de ideias do usuário
    */
-  static async getIdeasByUser(userId) {
+  static async getIdeasByUser(email) {
     try {
       return await this.getIdeasWithVoteCount({ 
-        authorId: new mongoose.Types.ObjectId(userId) 
+        authorEmail: email 
       });
     } catch (error) {
       console.error('Erro ao buscar ideias do usuário:', error);
@@ -177,7 +177,7 @@ class DatabaseQueries {
         {
           $lookup: {
             from: 'users',
-            localField: 'authorId',
+            localField: 'authorEmail',
             foreignField: '_id',
             as: 'author'
           }
@@ -373,7 +373,7 @@ class DatabaseQueries {
       }
       
       if (filters.author) {
-        mongoFilter.authorId = new mongoose.Types.ObjectId(filters.author);
+        mongoFilter.authorEmail = new mongoose.Types.ObjectId(filters.author);
       }
       
       if (filters.search) {

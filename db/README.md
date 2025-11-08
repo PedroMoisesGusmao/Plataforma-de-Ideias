@@ -61,7 +61,7 @@ plataforma_ideias/
   title: String (5-100 chars, required),
   description: String (10-1000 chars, required),
   category: Enum ['Tecnologia', 'Processos', 'Produtos', 'Sustentabilidade', 'RH', 'Marketing', 'Outros'],
-  authorId: ObjectId (ref: User, required),
+  authorEmail: ObjectId (ref: User, required),
   status: Enum ['Ativa', 'Em Análise', 'Aprovada', 'Rejeitada', 'Implementada'],
   createdAt: Date,
   updatedAt: Date
@@ -69,7 +69,7 @@ plataforma_ideias/
 
 // Métodos estáticos
 - findWithVoteCount(filter)
-- findByAuthor(authorId)
+- findByAuthor(authorEmail)
 ```
 
 **Validações Implementadas:**
@@ -116,7 +116,7 @@ plataforma_ideias/
 { userId: 1, ideaId: 1 } // Único composto - CRÍTICO para voto único
 
 // Idea
-{ authorId: 1 }
+{ authorEmail: 1 }
 ```
 
 ### Índices Adicionais (Performance)
@@ -125,7 +125,7 @@ plataforma_ideias/
 // Queries otimizadas
 { category: 1, createdAt: -1 }     // Busca por categoria
 { status: 1, createdAt: -1 }       // Busca por status
-{ authorId: 1, createdAt: -1 }     // Ideias do usuário
+{ authorEmail: 1, createdAt: -1 }     // Ideias do usuário
 { ideaId: 1, voteType: 1 }         // Contagem de votos
 { userId: 1, createdAt: -1 }       // Histórico de votos
 ```

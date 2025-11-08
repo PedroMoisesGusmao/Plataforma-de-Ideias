@@ -128,7 +128,7 @@ async function createIdeas(users) {
   try {
     const ideasWithAuthors = sampleIdeas.map((idea, index) => ({
       ...idea,
-      authorId: users[index % users.length]._id
+      authorEmail: users[index % users.length].email
     }));
 
     const ideas = await Idea.create(ideasWithAuthors);
@@ -156,7 +156,7 @@ async function createVotes(users, ideas) {
         const idea = shuffledIdeas[i];
         
         // Não votar na própria ideia
-        if (idea.authorId.toString() === user._id.toString()) continue;
+        if (idea.authorEmail.toString() === user.email.toString()) continue;
         
         const voteType = Math.random() > 0.2 ? 'like' : 'dislike'; // 80% likes, 20% dislikes
         

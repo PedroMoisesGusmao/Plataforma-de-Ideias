@@ -23,9 +23,8 @@ const IdeaSchema = new mongoose.Schema({
       message: 'Categoria deve ser uma das opções válidas'
     }
   },
-  authorId: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User', 
+  authorEmail: { 
+    type: String, 
     required: [true, 'Autor é obrigatório']
   },
   status: {
@@ -64,7 +63,7 @@ IdeaSchema.statics.createIdea = async function(data) {
 
 IdeaSchema.statics.findOneIdea = async function(id) {
   try {
-    return await this.findById(id).populate('authorId', 'name email');
+    return await this.findById(id).populate('authorEmail', 'name email');
   } catch (error) {
     throw error;
   }
@@ -72,7 +71,7 @@ IdeaSchema.statics.findOneIdea = async function(id) {
 
 IdeaSchema.statics.findAllIdeas = async function(filter = {}) {
   try {
-    return await this.find(filter).populate('authorId', 'name email').sort({ createdAt: -1 });
+    return await this.find(filter).populate('authorEmail', 'name email').sort({ createdAt: -1 });
   } catch (error) {
     throw error;
   }
@@ -83,7 +82,7 @@ IdeaSchema.statics.updateIdea = async function(id, data) {
     return await this.findByIdAndUpdate(id, data, {
       new: true,
       runValidators: true
-    }).populate('authorId', 'name email');
+    }).populate('authorEmail', 'name email');
   } catch (error) {
     throw error;
   }
@@ -112,7 +111,7 @@ IdeaSchema.statics.findWithVoteCount = function(filter = {}) {
     {
       $lookup: {
         from: 'users',
-        localField: 'authorId',
+        localField: 'authorEmail',
         foreignField: '_id',
         as: 'author'
       }
@@ -142,8 +141,8 @@ IdeaSchema.statics.findWithVoteCount = function(filter = {}) {
 };
 
 // Método estático para buscar ideias de um usuário específico
-IdeaSchema.statics.findByAuthor = function(authorId) {
-  return this.findWithVoteCount({ authorId: new mongoose.Types.ObjectId(authorId) });
+IdeaSchema.statics.findByAuthor = function(authorEmail) {
+  return this.findWithVoteCount({ authorEmail: new mongoose.Types.ObjectId(authorEmail) });
 };
 
 module.exports = mongoose.model('Idea', IdeaSchema);

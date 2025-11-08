@@ -1,39 +1,55 @@
 const Idea = require('../models/Idea');
 
 module.exports = {
-    async getAllIdeas (req, res) {
-        const ideas = await Idea.find({ raw: true });
-        return res.render('all', { ideas });
-    },
-
-    async saveIdea (req, res) {
-        await Idea.create({
-            title : req.body.title,
-            description : req.body.description,
-            category : req.body.category,
-            authorId : req.user._id,
-            status : req.body.status
-        })
-        res.redirect('/home');
-    },
- 
-    async updateIdea (req, res) {
-         await Idea.updateIdea({
-            title : req.body.title,
-            description : req.body.description,
-            category : req.body.category,
-            authorId : req.userId,
-            status : req.body.status
-        },
-        { where: { id: req.params.id } }
-    )
-        res.redirect('/ideas');
-    },
- 
-    async deleteIdea (req, res) {
-        const id = req.body.id;
-        await Idea.deleteIdea({ where: { id: id } });
-        res.redirect('/ideas');
+  async getAllIdeas(req, res) {
+    try {
+      const ideas = await Idea.find().lean(); 
+      res.render('all', { ideas }); 
+    } catch (error) {
+      console.error('Erro ao buscar ideias:', error);
+      res.render('all', { ideas: [] });
     }
-}
- 
+  },
+
+  async saveIdea(req, res) {
+    try {
+      await Idea.create({
+        title: req.body.title,
+        description: req.body.description,
+        category: req.body.category,
+        authorEmail: req.session.user?.email || 'desconhecido',
+        status: req.body.status
+      });
+      res.redirect('/home');
+    } catch (error) {
+      console.error('Erro ao salvar ideia:', error);
+      res.redirect('/create');
+    }
+  },
+
+  async updateIdea(req, res) {
+    try {
+      await Idea.findByIdAndUpdate(req.params.id, {
+        title: req.body.title,
+        description: req.body.description,
+        category: req.body.category,
+        authorEmail: req.session.user?.email || 'desconhecido',
+        status: req.body.status
+      });
+      res.redirect('/home');
+    } catch (error) {
+      console.error('Erro ao atualizar ideia:', error);
+      res.redirect('/home');
+    }
+  },
+
+  async deleteIdea(req, res) {
+    try {
+      await Idea.findByIdAndDelete(req.body.id);
+      res.redirect('/home');
+    } catch (error) {
+      console.error('Erro ao deletar ideia:', error);
+      res.redirect('/home');
+    }
+  }
+};

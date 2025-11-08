@@ -19,7 +19,7 @@ async function createIndexes() {
 
     // Índices para Idea
     await Idea.createIndexes();
-    console.log('✅ Índices da Idea criados (authorId, category, status, timestamps)');
+    console.log('✅ Índices da Idea criados (authorEmail, category, status, timestamps)');
 
     // Índices para Vote (o mais importante - índice único composto)
     await Vote.createIndexes();
@@ -55,7 +55,7 @@ async function createAdditionalIndexes() {
 
     // Índice para buscar ideias por autor e data
     await Idea.collection.createIndex(
-      { authorId: 1, createdAt: -1 },
+      { authorEmail: 1, createdAt: -1 },
       { name: 'author_createdAt_idx' }
     );
 

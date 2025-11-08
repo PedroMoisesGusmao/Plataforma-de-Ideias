@@ -12,10 +12,10 @@
                         <span class="badge badge-status {{this.status}}">{{this.status}}</span>
                     </div>
                     <div class="idea-actions">
-                        <a href="/idea/edit/{{this._id}}" class="btn-edit">✏️ Editar</a>
+                        <a href="/idea/edit/{{this._id}}" class="btn-edit">Editar</a>
                         <form class="delete-form" method="post" action="/idea/delete">
                             <input type="hidden" name="id" value="{{this._id}}"/>
-                            <button type="submit" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir esta ideia?')">🗑️ Excluir</button>
+                            <button type="submit" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir esta ideia?')">Excluir</button>
                         </form>
                     </div>
                 </li>

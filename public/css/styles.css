@@ -259,15 +259,19 @@ button[type="submit"]:active,
 }
 
 .btn-edit {
-    background: #667eea;
+    width: "fit-content";
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    text-decoration: none;
-    padding: 10px 24px;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    font-weight: 600;
+    border: none;
+    padding: 16px 30px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
     transition: all 0.3s ease;
-    display: inline-block;
+    box-shadow: 0 6px 20px rgba(118, 75, 162, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .btn-edit:hover {
@@ -674,3 +678,31 @@ button[type="submit"]:active,
         text-align: center;
     }
 }
+
+.flash {
+  margin: 15px auto;
+  padding: 12px 18px;
+  width: 80%;
+  border-radius: 8px;
+  font-weight: 500;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.flash.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
