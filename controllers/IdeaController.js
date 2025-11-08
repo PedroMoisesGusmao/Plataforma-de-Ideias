@@ -3,8 +3,8 @@ const Idea = require('../models/Idea');
 module.exports = {
   async getAllIdeas(req, res) {
     try {
-      const ideas = await Idea.find().lean(); 
-      res.render('all', { ideas }); 
+      const ideas = await Idea.find().lean();
+      res.render('all', { ideas });
     } catch (error) {
       console.error('Erro ao buscar ideias:', error);
       res.render('all', { ideas: [] });
@@ -62,12 +62,14 @@ module.exports = {
     },
 
     async deleteIdea(req, res) {
-    try {
-      await Idea.findByIdAndDelete(req.body.id);
-      res.redirect('/home');
-    } catch (error) {
-      console.error('Erro ao deletar ideia:', error);
-      res.redirect('/home');
+        try {
+            await Idea.findByIdAndDelete(req.params.id);
+            req.flash('success_msg', 'Ideia deletada com sucesso!');
+            res.redirect('/home');
+        } catch (error) {
+            console.error('Erro ao deletar ideia:', error);
+            req.flash('error_msg', 'Erro ao deletar ideia');
+            res.redirect('/home');
+        }
     }
-  }
 };

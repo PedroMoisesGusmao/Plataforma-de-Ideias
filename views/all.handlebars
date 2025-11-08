@@ -13,8 +13,7 @@
                     </div>
                     <div class="idea-actions">
                         <button onclick="location.href='/edit/{{this._id}}'" class="btn-edit">Editar</button>
-                        <form class="delete-form" method="post" action="/delete">
-                            <input type="hidden" name="id" value="{{this._id}}"/>
+                        <form class="delete-form" method="post" action="/idea/delete/{{this._id}}">
                             <button type="submit" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir esta ideia?')">Excluir</button>
                         </form>
                     </div>

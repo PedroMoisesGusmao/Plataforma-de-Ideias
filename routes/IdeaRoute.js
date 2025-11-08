@@ -32,5 +32,7 @@ router.put('/ideas/:id',
   ],
   ideaController.updateIdea
 );
- 
+
+router.post('/delete/:id', ideaController.deleteIdea);
+
 module.exports = router;
