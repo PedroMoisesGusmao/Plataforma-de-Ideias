@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const connectDB = async () => {
     try {
-        const mongoURI = process.env.MONGODB_URI;        
+        const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://dbUser:1234@mongococo2.vrvd9p7.mongodb.net/?appName=mongococo2';
         await mongoose.connect(mongoURI);
 
         console.log('✅ MongoDB conectado com sucesso!');

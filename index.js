@@ -41,9 +41,9 @@ app.use((req, res, next) => {
 app.use('/idea', ideaRoute);
 app.use('/user', userRoute);
 app.get('/create', (req, res) => res.render('create'));
-app.get('/edit/:id', (req, res) => res.render('edit'));
+app.get('/edit/:id', ideaController.getIdeaById);
 app.post('/create', ideaController.saveIdea);
-app.patch('/edit', ideaController.updateIdea);
+app.post('/edit', ideaController.updateIdea);
 app.get('/home', ideaController.getAllIdeas);
 app.get('/', (req, res) => {
     res.render('start', { layout: 'start', title: 'Bem vindo!!' });

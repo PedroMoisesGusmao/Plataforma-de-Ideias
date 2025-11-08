@@ -27,23 +27,41 @@ module.exports = {
     }
   },
 
-  async updateIdea(req, res) {
-    try {
-      await Idea.findByIdAndUpdate(req.params.id, {
-        title: req.body.title,
-        description: req.body.description,
-        category: req.body.category,
-        authorEmail: req.session.user?.email,
-        status: req.body.status
-      });
-      res.redirect('/home');
-    } catch (error) {
-      console.error('Erro ao atualizar ideia:', error);
-      res.redirect('/home');
-    }
-  },
+    async getIdeaById(req, res) {
+        try {
+            const idea = await Idea.findById(req.params.id).lean();
+            if (!idea) {
+                req.flash('error_msg', 'Ideia não encontrada');
+                return res.redirect('/home');
+            }
+            res.render('edit', { idea });
+        } catch (error) {
+            console.error('Erro ao carregar ideia:', error);
+            req.flash('error_msg', 'Erro ao carregar ideia');
+            res.redirect('/home');
+        }
+    },
 
-  async deleteIdea(req, res) {
+    async updateIdea(req, res) {
+        try {
+            const id = req.params.id;
+            await Idea.findByIdAndUpdate(id, {
+                title: req.body.title,
+                description: req.body.description,
+                category: req.body.category,
+                status: req.body.status,
+                authorEmail: req.session.user?.email
+            });
+            req.flash('success_msg', 'Ideia atualizada com sucesso!');
+            res.redirect('/home');
+        } catch (error) {
+            console.error('Erro ao atualizar ideia:', error);
+            req.flash('error_msg', 'Erro ao atualizar ideia');
+            res.redirect('/home');
+        }
+    },
+
+    async deleteIdea(req, res) {
     try {
       await Idea.findByIdAndDelete(req.body.id);
       res.redirect('/home');
