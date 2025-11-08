@@ -23,7 +23,7 @@ async function createIndexes() {
 
     // Índices para Vote (o mais importante - índice único composto)
     await Vote.createIndexes();
-    console.log('✅ Índices do Vote criados (userId + ideaId único composto)');
+    console.log('✅ Índices do Vote criados (userEmail + ideaId único composto)');
 
     // Índices adicionais para performance
     await createAdditionalIndexes();
@@ -67,7 +67,7 @@ async function createAdditionalIndexes() {
 
     // Índice para buscar votos por usuário
     await Vote.collection.createIndex(
-      { userId: 1, createdAt: -1 },
+      { userEmail: 1, createdAt: -1 },
       { name: 'user_vote_history_idx' }
     );
 

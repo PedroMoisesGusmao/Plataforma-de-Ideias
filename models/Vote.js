@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
 const VoteSchema = new mongoose.Schema({
-  userId: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User', 
+  userEmail: { 
+    type: String, 
     required: [true, 'Usuário é obrigatório']
   },
   ideaId: { 
@@ -21,26 +20,26 @@ const VoteSchema = new mongoose.Schema({
 });
 
 // Índice único composto para garantir que um usuário vote apenas uma vez por ideia
-VoteSchema.index({ userId: 1, ideaId: 1 }, { unique: true });
+VoteSchema.index({ userEmail: 1, ideaId: 1 }, { unique: true });
 
 // Método para verificar se já existe voto
-VoteSchema.statics.hasUserVoted = async function(userId, ideaId) {
-  const vote = await this.findOne({ userId, ideaId });
+VoteSchema.statics.hasUserVoted = async function(userEmail, ideaId) {
+  const vote = await this.findOne({ userEmail, ideaId });
   return !!vote;
 };
 
 // Método para alternar voto (toggle vote)
-VoteSchema.statics.toggleVote = async function(userId, ideaId, voteType = 'like') {
+VoteSchema.statics.toggleVote = async function(userEmail, ideaId, voteType = 'like') {
   try {
-    const existingVote = await this.findOne({ userId, ideaId });
+    const existingVote = await this.findOne({ userEmail, ideaId });
     
     if (existingVote) {
       // Se já votou, remove o voto
-      await this.deleteOne({ userId, ideaId });
+      await this.deleteOne({ userEmail, ideaId });
       return { action: 'removed', vote: null };
     } else {
       // Se não votou, adiciona o voto
-      const newVote = await this.create({ userId, ideaId, voteType });
+      const newVote = await this.create({ userEmail, ideaId, voteType });
       return { action: 'added', vote: newVote };
     }
   } catch (error) {
@@ -74,9 +73,9 @@ VoteSchema.statics.countVotesForIdea = async function(ideaId) {
 };
 
 // Método para obter estatísticas de votação do usuário
-VoteSchema.statics.getUserVoteStats = async function(userId) {
+VoteSchema.statics.getUserVoteStats = async function(userEmail) {
   return await this.aggregate([
-    { $match: { userId: new mongoose.Types.ObjectId(userId) } },
+    { $match: { userEmail: new mongoose.Types.ObjectId(userEmail) } },
     {
       $group: {
         _id: '$voteType',

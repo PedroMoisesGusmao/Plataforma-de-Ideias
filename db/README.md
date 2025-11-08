@@ -84,7 +84,7 @@ plataforma_ideias/
 ```javascript
 // Campos principais
 {
-  userId: ObjectId (ref: User, required),
+  userEmail: ObjectId (ref: User, required),
   ideaId: ObjectId (ref: Idea, required),
   voteType: Enum ['like', 'dislike'] (default: 'like'),
   createdAt: Date,
@@ -92,15 +92,15 @@ plataforma_ideias/
 }
 
 // Métodos estáticos
-- hasUserVoted(userId, ideaId)
-- toggleVote(userId, ideaId, voteType)
+- hasUserVoted(userEmail, ideaId)
+- toggleVote(userEmail, ideaId, voteType)
 - countVotesForIdea(ideaId)
-- getUserVoteStats(userId)
+- getUserVoteStats(userEmail)
 ```
 
 **Características Especiais:**
 
-- **Índice único composto** (userId + ideaId) - garante voto único
+- **Índice único composto** (userEmail + ideaId) - garante voto único
 - Método para alternar voto (toggle)
 - Contagem automática de votos por ideia
 
@@ -113,7 +113,7 @@ plataforma_ideias/
 { email: 1 } // Único
 
 // Vote
-{ userId: 1, ideaId: 1 } // Único composto - CRÍTICO para voto único
+{ userEmail: 1, ideaId: 1 } // Único composto - CRÍTICO para voto único
 
 // Idea
 { authorEmail: 1 }
@@ -127,7 +127,7 @@ plataforma_ideias/
 { status: 1, createdAt: -1 }       // Busca por status
 { authorEmail: 1, createdAt: -1 }     // Ideias do usuário
 { ideaId: 1, voteType: 1 }         // Contagem de votos
-{ userId: 1, createdAt: -1 }       // Histórico de votos
+{ userEmail: 1, createdAt: -1 }       // Histórico de votos
 ```
 
 **Comando para criar índices:**
@@ -151,7 +151,7 @@ const topIdeas = await DatabaseQueries.getTopIdeas(10);
 const techIdeas = await DatabaseQueries.getIdeasByCategory("Tecnologia");
 
 // Detalhes completos de uma ideia
-const ideaDetails = await DatabaseQueries.getIdeaDetails(ideaId, userId);
+const ideaDetails = await DatabaseQueries.getIdeaDetails(ideaId, userEmail);
 ```
 
 ### Queries Implementadas

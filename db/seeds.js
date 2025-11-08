@@ -161,7 +161,7 @@ async function createVotes(users, ideas) {
         const voteType = Math.random() > 0.2 ? 'like' : 'dislike'; // 80% likes, 20% dislikes
         
         votes.push({
-          userId: user._id,
+          userEmail: user._id,
           ideaId: idea._id,
           voteType
         });
@@ -171,7 +171,7 @@ async function createVotes(users, ideas) {
     // Remover duplicatas (caso existam)
     const uniqueVotes = votes.filter((vote, index, self) => 
       index === self.findIndex(v => 
-        v.userId.toString() === vote.userId.toString() && 
+        v.userEmail.toString() === vote.userEmail.toString() && 
         v.ideaId.toString() === vote.ideaId.toString()
       )
     );

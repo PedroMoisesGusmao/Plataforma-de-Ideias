@@ -155,10 +155,10 @@ class DatabaseQueries {
   /**
    * Busca uma ideia específica com detalhes completos
    * @param {String} ideaId - ID da ideia
-   * @param {String} userId - ID do usuário logado (opcional)
+   * @param {String} userEmail - ID do usuário logado (opcional)
    * @returns {Object} Ideia com detalhes completos
    */
-  static async getIdeaDetails(ideaId, userId = null) {
+  static async getIdeaDetails(ideaId, userEmail = null) {
     try {
       const pipeline = [
         { $match: { _id: new mongoose.Types.ObjectId(ideaId) } },
@@ -204,17 +204,17 @@ class DatabaseQueries {
               }
             },
             author: { $arrayElemAt: ['$author', 0] },
-            userVoted: userId ? {
-              $in: [new mongoose.Types.ObjectId(userId), '$votes.userId']
+            userVoted: userEmail ? {
+              $in: [new mongoose.Types.ObjectId(userEmail), '$votes.userEmail']
             } : false,
-            userVoteType: userId ? {
+            userVoteType: userEmail ? {
               $arrayElemAt: [
                 {
                   $map: {
                     input: {
                       $filter: {
                         input: '$votes',
-                        cond: { $eq: ['$$this.userId', new mongoose.Types.ObjectId(userId)] }
+                        cond: { $eq: ['$$this.userEmail', new mongoose.Types.ObjectId(userEmail)] }
                       }
                     },
                     as: 'vote',

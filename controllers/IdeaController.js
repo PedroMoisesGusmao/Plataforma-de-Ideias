@@ -17,7 +17,7 @@ module.exports = {
         title: req.body.title,
         description: req.body.description,
         category: req.body.category,
-        authorEmail: req.session.user?.email || 'desconhecido',
+        authorEmail: req.session.user?.email,
         status: req.body.status
       });
       res.redirect('/home');
@@ -33,7 +33,7 @@ module.exports = {
         title: req.body.title,
         description: req.body.description,
         category: req.body.category,
-        authorEmail: req.session.user?.email || 'desconhecido',
+        authorEmail: req.session.user?.email,
         status: req.body.status
       });
       res.redirect('/home');

@@ -1,8 +1,8 @@
 <div class="card">
-    <h2>✏️ Editar Ideia</h2>
+    <h2>Editar Ideia</h2>
 
     <div class="form-container">
-        <form action="/idea/update/{{idea._id}}" method="POST" class="idea-form">
+        <form action="/update/{{idea._id}}" method="POST" class="idea-form">
             <div class="form-group">
                 <label for="title">Título:</label>
                 <input
@@ -43,12 +43,13 @@
             <div class="form-group">
                 <label for="status">Status:</label>
                 <select id="status" name="status" required>
-                    <option value="Pendente" {{#if (eq idea.status 'Pendente')}}selected{{/if}}>⏳ Pendente</option>
-                    <option value="Aprovada" {{#if (eq idea.status 'Aprovada')}}selected{{/if}}>✅ Aprovada</option>
-                    <option value="Rejeitada" {{#if (eq idea.status 'Rejeitada')}}selected{{/if}}>❌ Rejeitada</option>
+                    <option value="Ativa" {{#if (eq idea.status 'Ativa')}}selected{{/if}}>Ativa</option>
+                    <option value="Aprovada" {{#if (eq idea.status 'Aprovada')}}selected{{/if}}>Aprovada</option>
+                    <option value="Em Análise" {{#if (eq idea.status 'Em Análise')}}selected{{/if}}>Em Análise</option>
+                    <option value="Rejeitada" {{#if (eq idea.status 'Rejeitada')}}selected{{/if}}>Rejeitada</option>
+                    <option value="Implementada" {{#if (eq idea.status 'Implementada')}}selected{{/if}}>Implementada</option>
                 </select>
             </div>
-
             <button type="submit">💾 Atualizar Ideia</button>
         </form>
     </div>
