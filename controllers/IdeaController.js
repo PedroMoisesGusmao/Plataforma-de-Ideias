@@ -27,18 +27,25 @@ module.exports = {
     },
 
   async saveIdea(req, res) {
+    const userEmail = req.session.user?.email;
+
+    if (!userEmail) {
+        req.flash('error_msg', 'Você precisa estar logado para votar.');
+        return res.redirect('/user/login');
+    }
+    
     try {
       await Idea.create({
         title: req.body.title,
         description: req.body.description,
         category: req.body.category,
-        authorEmail: req.session.user?.email,
+        authorEmail: userEmail,
         status: req.body.status
       });
-      res.redirect('/home');
+      res.redirect('/idea/home');
     } catch (error) {
       console.error('Erro ao salvar ideia:', error);
-      res.redirect('/create');
+      res.redirect('/idea/create');
     }
   },
 
@@ -47,17 +54,24 @@ module.exports = {
             const idea = await Idea.findById(req.params.id).lean();
             if (!idea) {
                 req.flash('error_msg', 'Ideia não encontrada');
-                return res.redirect('/home');
+                return res.redirect('/idea/home');
             }
             res.render('edit', { idea });
         } catch (error) {
             console.error('Erro ao carregar ideia:', error);
             req.flash('error_msg', 'Erro ao carregar ideia');
-            res.redirect('/home');
+            res.redirect('/idea/home');
         }
     },
 
     async updateIdea(req, res) {
+        const userEmail = req.session.user?.email;
+
+        if (!userEmail) {
+            req.flash('error_msg', 'Você precisa estar logado para votar.');
+            return res.redirect('/user/login');
+        }
+        
         try {
             const { id } = req.params;
             await Idea.findByIdAndUpdate(id, {
@@ -65,14 +79,14 @@ module.exports = {
                 description: req.body.description,
                 category: req.body.category,
                 status: req.body.status,
-                authorEmail: req.session.user?.email
+                authorEmail: userEmail
             });
             req.flash('success_msg', 'Ideia atualizada com sucesso!');
-            res.redirect('/home');
+            res.redirect('/idea/home');
         } catch (error) {
             console.error('Erro ao atualizar ideia:', error);
             req.flash('error_msg', 'Erro ao atualizar ideia');
-            res.redirect('/home');
+            res.redirect('/idea/home');
         }
     },
 
@@ -80,11 +94,11 @@ module.exports = {
         try {
             await Idea.findByIdAndDelete(req.params.id);
             req.flash('success_msg', 'Ideia deletada com sucesso!');
-            res.redirect('/home');
+            res.redirect('/idea/home');
         } catch (error) {
             console.error('Erro ao deletar ideia:', error);
             req.flash('error_msg', 'Erro ao deletar ideia');
-            res.redirect('/home');
+            res.redirect('/idea/home');
         }
     }
 };

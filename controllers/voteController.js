@@ -22,11 +22,11 @@ module.exports = {
                     : 'Voto removido com sucesso!'
             );
 
-            res.redirect('/home');
+            res.redirect('/idea/home');
         } catch (error) {
             console.error('Erro ao votar:', error);
             req.flash('error_msg', 'Erro ao processar o voto');
-            res.redirect('/home');
+            res.redirect('/idea/home');
         }
     },
 

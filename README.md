@@ -31,19 +31,18 @@ A **Plataforma de Ideias para Inovação** é um sistema web desenvolvido para p
 
 ## ( ͡• ͜ʖ ͡• ) Rotas (URL)
 
-| Módulo         | Funcionalidade                                     |
-|----------------|----------------------------------------------------|
-| /              | Começo, onde o usuário escolhe o login ou cadastro |
-| /user/login    | Login                                              |
-| /user/register | Cadastro                                           |
-| /home          | Tela inicial, com listagem das ideias              |
-| /create        | Criação de ideias                                  |
-
----
-
-## 🗄️ Modelagem do Banco de Dados
-
-inserir a modelagem
+| Módulo                | Funcionalidade                                     |
+|-----------------------|----------------------------------------------------|
+| /                     | Começo, onde o usuário escolhe o login ou cadastro |
+| /user/login           | Login                                              |
+| /user/logout          | Logout                                             |
+| /user/register        | Cadastro                                           |
+| /idea/home            | Tela inicial, com listagem das ideias              |
+| /idea/create          | Criar uma nova ideia                               |
+| /idea/update/:id      | Edição de ideias existentes                        |
+| /idea/delete/:id      | Exclusão de ideias existentes                      |
+| /vote/toggle/:ideaId  | Alterna voto (adiciona ou remove).                 |
+| /vote/count/:ideaId   | Retorna contagem de votos para uma ideia.          |
 
 ---
 

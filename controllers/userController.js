@@ -67,7 +67,7 @@ module.exports = {
             };
 
             req.flash('success_msg', 'Login realizado com sucesso!');
-            res.redirect('/home');
+            res.redirect('/idea/home');
         } catch (error) {
             console.error('Erro ao fazer login:', error);
             req.flash('error_msg', 'Erro interno no servidor');

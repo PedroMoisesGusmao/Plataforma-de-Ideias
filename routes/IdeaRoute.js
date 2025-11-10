@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const { body } = require('express-validator');
 const ideaController = require('../controllers/ideaController');
- 
-router.post('/ideas',
+
+router.get('/create', (req, res) => res.render('create'));
+router.post('/create',
   [
     body('title')
       .notEmpty().withMessage('O título é obrigatório')
@@ -17,9 +18,10 @@ router.post('/ideas',
   ],
   ideaController.saveIdea
 );
- 
-router.put('/ideas/:id',
-  [
+
+router.get('/edit/:id', ideaController.getIdeaById);
+router.post('/update/:id', 
+    [
     body('title')
       .optional()
       .isLength({ min: 3 }).withMessage('O título deve ter pelo menos 3 caracteres'),
@@ -30,8 +32,8 @@ router.put('/ideas/:id',
     body('category')
       .optional()
   ],
-  ideaController.updateIdea
-);
+  ideaController.updateIdea);
+router.get('/home', ideaController.getAllIdeas);
 
 router.post('/delete/:id', ideaController.deleteIdea);
 
