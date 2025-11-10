@@ -3,7 +3,9 @@
 
 ## Objetivo
 
-A **Plataforma de Ideias para Inovação** é um sistema web desenvolvido para permitir que colaboradores do Grupo J&F proponham, votem e acompanhem ideias inovadoras.  
+A **Plataforma de Ideias para Inovação** é um sistema web desenvolvido para permitir que colaboradores do Grupo J&F proponham, votem e acompanhem ideias inovadoras. 
+
+**Aplicação na nuvem:** https://plataforma-de-ideias.onrender.com/
 
 ## Tecnologias
 
@@ -109,6 +111,7 @@ Acesse em: [http://localhost:3000](http://localhost:3000)
 
 
 ---
+
 
 
 
