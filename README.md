@@ -10,7 +10,7 @@ A **Plataforma de Ideias para Inovação** é um sistema web desenvolvido para p
 - **Node.js + Express.js**
 - **Handlebars** 
 - **MongoDB (via Mongoose)**  
-- **Express-Session + bcrypt + csurf + helmet**
+- **Express-Session + bcrypt + helmet**
 - **express-validator** 
 - **dotenv** 
 
@@ -24,7 +24,6 @@ A **Plataforma de Ideias para Inovação** é um sistema web desenvolvido para p
 | Ideias | CRUD Completo | Criação, leitura, edição e exclusão de ideias |
 | Votação | Voto Único por Usuário | Relaciona usuários e ideias, impedindo votos duplicados |
 | Autorização | Controle de Acesso | Apenas o autor pode editar/excluir suas ideias |
-| Interface | Handlebars + Flash | Feedback amigável e design simples |
 | Segurança | helmet + csurf | Proteções contra ataques comuns |
 
 ---
@@ -46,7 +45,7 @@ A **Plataforma de Ideias para Inovação** é um sistema web desenvolvido para p
 
 ---
 
-## 🧰 Como iniciar o projeto
+## 🛹 Como rodar o projeto locamente
 
 ### 1️⃣ Clonar o projeto
 ```bash
@@ -95,6 +94,16 @@ Acesse em: [http://localhost:3000](http://localhost:3000)
 
 
 ---
+
+---
+
+## Modelagem do banco
+
+<img width="613" height="520" alt="image" src="https://github.com/user-attachments/assets/6a063903-53ea-454d-8f0a-7587cb41f6ce" />
+
+
+---
+
 
 
 
