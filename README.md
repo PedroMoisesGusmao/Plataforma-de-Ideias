@@ -61,12 +61,18 @@ npm install
 ### 3️⃣ Configurar variáveis de ambiente
 Crie um arquivo `.env` com:
 ```bash
-DB_HOST=localhost
-DB_USER=root
-DB_PASS=senha
-DB_NAME=plataforma_ideias
-SESSION_SECRET=segredo_seguro
+# Configuração do Banco de Dados MongoDB
+MONGODB_URI=mongodb://localhost:27017/plataforma_ideias
+
+# Para MongoDB Atlas (cloud), use o formato:
+# MONGODB_URI=mongodb+srv://usuario:senha@cluster.mongodb.net/plataforma_ideias?retryWrites=true&w=majority
+
+# Configurações da Aplicação
+NODE_ENV=development
 PORT=3000
+
+# Configurações de Sessão
+SESSION_SECRET=sua_chave_secreta_super_segura_aqui
 ```
 
 ### 4️⃣ Executar o servidor
@@ -103,6 +109,7 @@ Acesse em: [http://localhost:3000](http://localhost:3000)
 
 
 ---
+
 
 
 
