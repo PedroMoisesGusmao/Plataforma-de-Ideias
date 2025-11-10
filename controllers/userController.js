@@ -74,4 +74,10 @@ module.exports = {
             res.redirect('/user/login');
         }
     },
-};
+
+    async logout(req, res) {
+        req.session = null;
+        res.clearCookie('connect.sid');
+        res.redirect('/user/login');
+        }
+    }
