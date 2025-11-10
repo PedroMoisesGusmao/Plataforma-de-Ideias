@@ -30,7 +30,7 @@ module.exports = {
             };
 
             req.flash('success_msg', 'Usuário registrado com sucesso!');
-            res.redirect('/home');
+            res.redirect('/idea/home');
         } catch (error) {
             console.error('Erro ao registrar usuário:', error);
             req.flash('error_msg', 'Erro ao registrar usuário');
