@@ -19,10 +19,12 @@
                     <div class="idea-actions">
                         <button onclick="location.href='/idea/edit/{{this._id}}'" class="btn-edit">Editar</button>
                         <form class="delete-form" method="post" action="/idea/delete/{{this._id}}">
+                            <input type="hidden" name="_csrf" value="{{@root.csrfToken}}">
                             <button type="submit" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir esta ideia?')">Excluir</button>
                         </form>
 
                         <form action="/vote/toggle/{{this._id}}" method="POST" class="vote-form">
+                            <input type="hidden" name="_csrf" value="{{@root.csrfToken}}">
                             <button type="submit" class="btn-vote {{#if this.userVoted}}voted{{/if}}">
                                 {{#if this.userVoted}}Retirar voto{{else}}Votar{{/if}}
                             </button>
