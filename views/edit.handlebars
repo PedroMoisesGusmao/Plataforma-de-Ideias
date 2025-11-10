@@ -3,6 +3,7 @@
 
     <div class="form-container">
         <form action="/idea/update/{{idea._id}}" method="POST" class="idea-form">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
             <div class="form-group">
                 <label for="title">Título:</label>
                 <input

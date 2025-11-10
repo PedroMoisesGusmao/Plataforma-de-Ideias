@@ -4,6 +4,7 @@
         <p class="subtitle">Bem-vindo de volta!</p>
 
         <form action="/user/login" method="POST">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
             <div class="form-group">
                 <label for="email">E-mail:</label>
                 <input

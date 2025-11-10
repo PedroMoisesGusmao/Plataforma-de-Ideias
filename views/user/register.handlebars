@@ -4,6 +4,7 @@
         <p class="subtitle">Crie sua conta e comece a compartilhar ideias!</p>
 
         <form action="/user/register" method="POST">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
             <div class="form-group">
                 <label for="name">Nome Completo:</label>
                 <input
