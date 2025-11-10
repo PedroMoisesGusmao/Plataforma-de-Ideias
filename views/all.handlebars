@@ -17,7 +17,10 @@
                         <span class="badge badge-status {{this.status}}">{{this.status}}</span>
                     </div>
                     <div class="idea-actions">
-                        <button onclick="location.href='/idea/edit/{{this._id}}'" class="btn-edit">Editar</button>
+                        <form action="/idea/edit/{{this._id}}" method="GET" style="display: inline;">
+                            <button type="submit" class="btn-edit">Editar</button>
+                        </form>
+                        
                         <form class="delete-form" method="post" action="/idea/delete/{{this._id}}">
                             <input type="hidden" name="_csrf" value="{{@root.csrfToken}}">
                             <button type="submit" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir esta ideia?')">Excluir</button>
