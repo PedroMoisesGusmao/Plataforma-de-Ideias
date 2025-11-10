@@ -7,10 +7,6 @@ router.get('/login', (req, res) => {
     res.render('user/login', { layout: 'start', title: 'Login' });
 });
 
-router.get('/logout', (req, res) => {
-    res.redirect('/user/logout');
-});
-
 router.get('/register', (req, res) => {
     res.render('user/register', { layout: 'start', title: 'Cadastro' });
 });
@@ -41,6 +37,6 @@ router.post('/login',
     userController.login
 );
 
-router.post('/logout', userController.logout);
+router.get('/logout', userController.logout);
 
 module.exports = router;

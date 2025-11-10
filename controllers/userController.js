@@ -11,17 +11,17 @@ module.exports = {
             return res.redirect('/user/register');
         }
 
-        const { name, email, password } = req.body;
+        const {name, email, password} = req.body;
 
         try {
-            const userExists = await User.findOne({ email });
+            const userExists = await User.findOne({email});
             if (userExists) {
                 req.flash('error_msg', 'E-mail já cadastrado');
                 return res.redirect('/user/register');
             }
 
             const hashedPassword = await bcrypt.hash(password, 10);
-            const user = await User.create({ name, email, password: hashedPassword });
+            const user = await User.create({name, email, password: hashedPassword});
 
             req.session.user = {
                 id: user._id,
@@ -46,10 +46,10 @@ module.exports = {
             return res.redirect('/user/login');
         }
 
-        const { email, password } = req.body;
+        const {email, password} = req.body;
 
         try {
-            const user = await User.findOne({ email });
+            const user = await User.findOne({email});
             if (!user) {
                 req.flash('error_msg', 'Usuário não encontrado');
                 return res.redirect('/user/login');
@@ -76,8 +76,17 @@ module.exports = {
     },
 
     async logout(req, res) {
-        req.session = null;
-        res.clearCookie('connect.sid');
-        res.redirect('/user/login');
-        }
+        const userName = req.session?.user?.name; // opcional, se quiser personalizar mensagem
+        req.session.destroy((err) => {
+            if (err) {
+                console.error('Erro ao encerrar sessão:', err);
+                return res.redirect('/idea/home');
+            }
+
+            res.clearCookie('connect.sid');
+            res.redirect('/?logout=1');
+        });
     }
+
+}
+
