@@ -76,7 +76,6 @@ module.exports = {
     },
 
     async logout(req, res) {
-        const userName = req.session?.user?.name; // opcional, se quiser personalizar mensagem
         req.session.destroy((err) => {
             if (err) {
                 console.error('Erro ao encerrar sessão:', err);
