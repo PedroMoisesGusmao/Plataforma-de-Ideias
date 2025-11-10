@@ -27,25 +27,6 @@ const UserSchema = new mongoose.Schema({
   timestamps: true // Adiciona createdAt e updatedAt automaticamente
 });
 
-// Middleware para hash da senha antes de salvar
-UserSchema.pre('save', async function(next) {
-  // Só faz hash se a senha foi modificada
-  if (!this.isModified('password')) return next();
-  
-  try {
-    const salt = await bcrypt.genSalt(12);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Método para comparar senhas
-UserSchema.methods.comparePassword = async function(candidatePassword) {
-  return await bcrypt.compare(candidatePassword, this.password);
-};
-
 // Método para remover senha do JSON
 UserSchema.methods.toJSON = function() {
   const userObject = this.toObject();
