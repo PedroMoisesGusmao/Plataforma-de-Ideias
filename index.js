@@ -5,12 +5,15 @@ const flash = require('express-flash');
 const csrf = require('csurf');
 const cookieParser = require('cookie-parser');
 const conn = require('./db/conn');
+const helmet = require('helmet');
 const ideaRoute = require('./routes/ideaRoute');
 const userRoute = require('./routes/userRoute');
 const voteRoute = require('./routes/voteRoute');
 
 const app = express();
 const PORT = 3000;
+
+app.use(helmet());
 
 const hbs = exphbs.create({
   helpers: {
