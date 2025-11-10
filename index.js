@@ -2,6 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const flash = require('express-flash');
+const helmet = require('helmet');
 const conn = require('./db/conn');
 const ideaRoute = require('./routes/ideaRoute');
 const userRoute = require('./routes/userRoute');
@@ -9,6 +10,8 @@ const voteRoute = require('./routes/voteRoute');
 
 const app = express();
 const PORT = 3000;
+
+app.use(helmet());
 
 const hbs = exphbs.create({
   helpers: {
